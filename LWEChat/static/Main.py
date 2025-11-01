@@ -306,20 +306,15 @@ def requestPublicKey():
     targetId=document.querySelector('#targetId')
     targetId=targetId.innerHTML
     targetId=IntBits(len(targetId))+targetId
-    print(targetId)
     socket.send('request','request',username,targetId)
 
 def genSharedKey(pk):
-    console.log(pk)
     e,K=CAKEenc(pk)
-    console.log(e)
-    console.log('K'+str(K))
     return e,K
 
 def derSharedKey(c):
     global sk
     K=CAKEdec(c,sk)
-    console.log('K'+str(K))
     return K
 
 def on_connect():
@@ -342,7 +337,6 @@ def on_message(data):
             sender=data[8:8+lenuser]
             target=data[:8+lenuser]
             data=data[8+lenuser:]
-            print(contacts, sender)
             if sender in contacts:
                 if '100_' in data:
                     ciphertext=getbytes(data[4:len(data)-256])
@@ -364,7 +358,6 @@ def on_message(data):
                     socket.send('c',username+'011_'+getBits(c),username,target)
                 elif '011_' in data:
                     K[sender]=derSharedKey(getbytes(data[4:]))
-                    console.log(K)
                 elif '101_' in data:
                     output.innerHTML += '<p class="othermessages">'+data[4:]+'</p>'
             else:
@@ -403,7 +396,6 @@ def say_hello(event):
     greeting = document.querySelector('#message').value
     cipher = AES.new(K[targetId2], AES.MODE_EAX)
     nonce=cipher.nonce
-    console.log(str(nonce))
     ciphertext, tag = cipher.encrypt_and_digest(greeting.encode('utf-8'))
     socket.send('message',username+'100_'+getBits(ciphertext)+getBits(tag)+getBits(nonce), username,targetId)
     output.innerHTML += '<p class="ownmessages">'+str(greeting)+'</p>'
@@ -442,7 +434,6 @@ def newID(event):
     set_target_proxy = create_proxy(set_target)
     new_button.addEventListener("click", set_target_proxy)
     document.querySelector('#newId').value=''
-    print(contacts)
     requestPublicKey()
 
 
@@ -451,8 +442,6 @@ newID_proxy = create_proxy(newID)
 
 
 pk,sk,z=CAKEkeygen()
-console.log('pk:')
-console.log(str(pk))
 
 socket.on('connect', create_proxy(on_connect))
 
