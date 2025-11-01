@@ -5,7 +5,7 @@ import hashlib
 from sympy import ntt, intt
 from Crypto.Cipher import AES
 # Initialize Socket.IO
-socket = io.connect('http://localhost:8000')
+socket = io.connect('https://lwe-chat.onrender.com')
 
 #Parameters
 n=256
