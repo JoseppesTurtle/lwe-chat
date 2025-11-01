@@ -112,13 +112,16 @@ def Login():
     newpassword = request.args.get('npsw')
     password = request.args.get('psw')
     
-    if user is None and newuser is None:  # Nothing entered show form
+    if user is None and newuser is None: 
         
         return render_template('Login.html')
     elif user is None:
         
         if newuser.strip() == '' or newpassword.strip() == '':
-            return'<h1>Please enter Username AND a Password. Try again.</h1>'
+            return render_template_string('''
+        <p>Please Enter a username and password</p>
+        <a href="https://lwe-chat.onrender.com">Go back</a>
+    ''')
         else:
             if newuser is None or newpassword is None:
                 pass
@@ -126,16 +129,24 @@ def Login():
                 salt=bcrypt.gensalt()
                 hash=bcrypt.hashpw(newpassword.encode(), salt)
                 new_user(newuser,hash,salt)
-                return'<h1>great</h1>'
+                return render_template_string('''<h1>great</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+    ''')
             else:
-                return '<h1>Username exists</h1>'
+                return render_template_string('''<h1>Username exists</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+    ''')
     else:
-        if user.strip() == '' or password.strip() == '':  # Empty input
-            return '<h1>Incorrect Username or Password</h1>'
-        elif searchuser(user, password):
-            return redirect(url_for('index', name=user)) 
+        if user.strip() == '' or password.strip() == '': 
+            return render_template_string('''<h1>Empty Input!</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+    ''')
+        elif checkuser(newuser):
+            return render_template_string('''<h1>User doesn't exist</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+    ''')
         else:
-            return '<h1>Incorrect Username or Password</h1>'
+            if searchuser(user, password):
+                return redirect(url_for('index', name=user)) 
+            else:
+                return render_template_string('''<h1>Incorrect Username or Password</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+    ''')
     
 @socketio.on_error()
 def error_handler(e):
