@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from flask_socketio import SocketIO, send, join_room, leave_room
 import sqlite3
 import bcrypt
+import eventlet
 from hashlib import sha256
 
 connection = sqlite3.connect('Login.db')
@@ -70,7 +71,7 @@ def get_id(username):
 
 app = Flask(__name__)
 
-socketio = SocketIO(app, cors_allowed_origins='*')
+socketio = SocketIO(app, async_mode='eventlet')
 
 
 #MESSAGE
