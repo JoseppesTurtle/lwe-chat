@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Chatroom</title>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Chatroom.css') }}">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+
+<div class = "chatapp" id="chatapp">
+
+<div class = "chatbox" id="chatbox">
+<button class="targetId" id = "targetId">admin</button>
+<div class="newId">
+<input type="text" id="newId" placeholder="New Friendname"></input>
+<button id="newI">Request</button>
+</div>
+</div>
+
+
+<div class = "chat" id = "chat">
+<div class ='container'>
+<div class ='spacer'></div>
+
+<button name='encrypt' id='encrypt' hidden>Send</button>
+<h1 class = 'header'> Welcome to the Chatroom</h1>
+<p name="username" id="username" class = 'paragraph' >{{ name }}</p>
+</div>
+
+
+<div name="messages" id="messages">
+<div name="admin" id="admin"class='messages'>
+</div>
+</div>
+<div class="space">
+</div>
+<div id ='inputArea' class = 'inputArea'>
+<input type='text' name='message' id='message' class = 'message'placeholder="Message"></input>
+<button name='sendBtn' id='sendBtn'>Loading...</button>
+</div>
+
+</div>
+
+</div>
+<script type="module">
+      async function main() {
+        let pyodide = await loadPyodide();
+
+        await pyodide.loadPackage("micropip");
+        const micropip = pyodide.pyimport("micropip");
+        await micropip.install('sympy');
+        await micropip.install('pycryptodome')
+        const response = await fetch("{{ url_for('static', filename='Main.py') }}");
+        const pythonCode = await response.text();
+        
+        await pyodide.runPythonAsync(pythonCode);
+      }
+      main();
+    </script>
+
+</body>
+</html>
