@@ -138,7 +138,7 @@ def Login():
         if user.strip() == '' or password.strip() == '': 
             return render_template_string('''<h1>Empty Input!</h1><a href="https://lwe-chat.onrender.com">Go back</a>
     ''')
-        elif checkuser(newuser):
+        elif checkuser(user):
             return render_template_string('''<h1>User doesn't exist</h1><a href="https://lwe-chat.onrender.com">Go back</a>
     ''')
         else:
