@@ -23,16 +23,21 @@ body {
 }
 
 .targetId {
+  font-size: large;
+  color:black;
   width:100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #40444b;
-  border-radius: 5px;
+  background-color: #c6c6c6;
+  border-bottom-style:solid;
+  border-top-style: hidden;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  border-bottom: black;
+  height: 40px;
   cursor: pointer;
 }
 
 .targetId:hover {
-  background-color: #50545c;
+  background-color: #595959;
 }
 
 #newbutton {
@@ -47,25 +52,36 @@ body {
 .newId{
   height:5%;
   position:absolute;
+  display:flex;
   left:0%;
   bottom: 3px;
 }
 
 #newId {
-  height: 100%;
-  margin-bottom: 0px;
-  background-color: #40444b;
-  border-radius: 5px;
-  padding: 0px;
+  font-size: large;
+  color:black;
+  width: 55%;
+  background-color: #c6c6c6;
+  border-bottom-style:solid;
+  border-top-style: hidden;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  border-bottom: black;
+  height: 40px;
   cursor: pointer;
 }
 
 #newI {
-  height: 100%;
-  margin-bottom: 0px;
-  background-color: #40444b;
-  border-radius: 5px;
-  padding: 0px;
+  font-size: large;
+  color:black;
+  width: 30%;
+  background-color: #c6c6c6;
+  border-bottom-style:solid;
+  border-top-style: hidden;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  border-bottom: black;
+  height: 40px;
   cursor: pointer;
 }
 
