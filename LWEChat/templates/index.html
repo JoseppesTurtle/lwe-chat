@@ -25,7 +25,7 @@
 <div class ='spacer'></div>
 
 <button name='encrypt' id='encrypt' hidden>Send</button>
-<h1 class = 'header'> Welcome to the Chatroom</h1>
+<h1 class = 'header'> Welcome to LWE-Chat</h1>
 <p name="username" id="username" class = 'paragraph' >{{ name }}</p>
 </div>
 
@@ -47,14 +47,12 @@
 <script type="module">
       async function main() {
         let pyodide = await loadPyodide();
-
         await pyodide.loadPackage("micropip");
         const micropip = pyodide.pyimport("micropip");
         await micropip.install('sympy');
         await micropip.install('pycryptodome')
         const response = await fetch("{{ url_for('static', filename='Main.py') }}");
         const pythonCode = await response.text();
-        
         await pyodide.runPythonAsync(pythonCode);
       }
       main();
