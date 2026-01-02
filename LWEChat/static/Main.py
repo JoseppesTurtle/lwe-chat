@@ -5,7 +5,7 @@ import hashlib
 from sympy import ntt, intt
 from Crypto.Cipher import AES
 # Initialize Socket.IO
-socket = io.connect('https://lwe-chat.onrender.com')
+socket = io.connect('https://lwechat.onrender.com')
 
 #Parameters
 n=256
@@ -464,3 +464,4 @@ K={}
 
 output = document.querySelector("#admin")
 output.innerHTML = "<p class='othermessages'>Type in your message and send it</p>"
+
