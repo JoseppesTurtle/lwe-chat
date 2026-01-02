@@ -451,7 +451,13 @@ socket.on('message', create_proxy(on_message))
 button = document.querySelector("#sendBtn")
 button.innerText='Send'
 button.addEventListener("click", hello_proxy)
-    
+
+def on_keypress(event):
+    if event.key == "Enter":
+        document.getElementById("sendBtn").click()
+keypress_proxy = create_proxy(on_keypress)
+document.addEventListener("keypress", keypress_proxy)
+
 Request = document.querySelector("#newI")
 Request.addEventListener("click", newID_proxy)
 
