@@ -120,7 +120,7 @@ def Login():
         if newuser.strip() == '' or newpassword.strip() == '':
             return render_template_string('''
         <p>Please Enter a username and password</p>
-        <a href="https://lwe-chat.onrender.com">Go back</a>
+        <a href="https://lwechat.onrender.com">Go back</a>
     ''')
         else:
             if newuser is None or newpassword is None:
@@ -129,23 +129,23 @@ def Login():
                 salt=bcrypt.gensalt()
                 hash=bcrypt.hashpw(newpassword.encode(), salt)
                 new_user(newuser,hash,salt)
-                return render_template_string('''<h1>great</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+                return render_template_string('''<h1>great</h1><a href="https://lwechat.onrender.com">Go back</a>
     ''')
             else:
-                return render_template_string('''<h1>Username exists</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+                return render_template_string('''<h1>Username exists</h1><a href="https://lwechat.onrender.com">Go back</a>
     ''')
     else:
         if user.strip() == '' or password.strip() == '': 
-            return render_template_string('''<h1>Empty Input!</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+            return render_template_string('''<h1>Empty Input!</h1><a href="https://lwechat.onrender.com">Go back</a>
     ''')
         elif checkuser(user):
-            return render_template_string('''<h1>User doesn't exist</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+            return render_template_string('''<h1>User doesn't exist</h1><a href="https://lwechat.onrender.com">Go back</a>
     ''')
         else:
             if searchuser(user, password):
                 return redirect(url_for('index', name=user)) 
             else:
-                return render_template_string('''<h1>Incorrect Username or Password</h1><a href="https://lwe-chat.onrender.com">Go back</a>
+                return render_template_string('''<h1>Incorrect Username or Password</h1><a href="https://lwechat.onrender.com">Go back</a>
     ''')
     
 @socketio.on_error()
@@ -154,4 +154,5 @@ def error_handler(e):
     
 
 if __name__ == '__main__':
+
     socketio.run(app, debug=True, port=8000)
