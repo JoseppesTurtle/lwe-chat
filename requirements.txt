@@ -82,4 +82,6 @@ gevent==22.10.2
 zope.interface==5.4.0
 gevent-websocket==0.10.1
 eventlet==0.33.0
+zope.event==4.5.0
+
 
