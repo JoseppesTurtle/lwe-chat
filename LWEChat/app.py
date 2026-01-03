@@ -4,6 +4,8 @@ import sqlite3
 import bcrypt
 import gevent
 from hashlib import sha256
+from gevent import monkey
+monkey.patch_all()
 
 connection = sqlite3.connect('Login.db')
 
